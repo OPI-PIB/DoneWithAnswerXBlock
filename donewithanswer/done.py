@@ -125,7 +125,7 @@ class DoneWithAnswerXBlock(XBlock):
     # It should be included as a mixin.
 
     display_name = String(
-        default="Completion 2", scope=Scope.settings,
+        default="Pytanie do autorefleksji z odpowiedzią zwrotną", scope=Scope.settings,
         help="Display name"
     )
 
