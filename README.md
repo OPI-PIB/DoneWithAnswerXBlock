@@ -1,12 +1,10 @@
-DoneXBlock
+DoneWithAnswerXBlock
 ==============
 
+DoneXBlock extendet rip off.
+
 Lets a student mark they've finished an activity. The student can
-click through two states of the XBlock, shown below:
-
-![Done screenshot](completionxblock_mark.png)
-
-![Done screenshot](completionxblock_undo.png)
+click through two states of the XBlock and get feedback.
 
 FutureLearn uses this kind of thing to great effect. Students can read
 text, watch videos, etc., and indicate when their done. This is
