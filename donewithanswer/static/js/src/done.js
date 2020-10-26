@@ -8,23 +8,21 @@ if (typeof Logger === 'undefined') {
 
 function update_knob(element, data) {
   if($('.done_onoffswitch-checkbox', element).prop("checked")) {
-    $(".done_onoffswitch-switch", element).css("background-image", "url("+data['checked']+")");
-    $(".done_onoffswitch-switch", element).css("background-color", "#018801;");
+    $(".done_onoffswitch-switch").css("border","");
+    $(".done_feedback", element).css("display", "");
   } else {
-    $(".done_onoffswitch-switch", element).css("background-image", "url("+data['unchecked']+")");
-    $(".done_onoffswitch-switch", element).css("background-color", "#FFFFFF;");
+    $(".done_feedback", element).css("display", "none");
   }
+    if($(".done_description",element).text() === "None") {
+        $(".done_description", element).css("display", "none");
+    }
+    if($(".done_feedback",element).text() === "None") {
+        $(".done_feedback", element).css("display", "none");
+    }
 }
 
-function DoneXBlock(runtime, element, data) {
+function DoneWithAnswerXBlock(runtime, element, data) {
     $('.done_onoffswitch-checkbox', element).prop("checked", data.state);
-
-    if (data.align != "right") {
-	$('.done_right_spacer', element).addClass("done_grow");
-    }
-    if (data.align != "left") {
-	$('.done_left_spacer', element).addClass("done_grow");
-    }
 
     update_knob(element, data);
     var handlerUrl = runtime.handlerUrl(element, 'toggle_button');

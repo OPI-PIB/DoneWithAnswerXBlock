@@ -41,21 +41,21 @@ def is_requirement(line):
 
 
 setup(
-    name='done-xblock',
+    name='done-with-answer-xblock',
     version='2.0.3',
-    description='done XBlock',   # TODO: write a better description.
+    description='done with answer XBlock',   # TODO: write a better description.
     classifiers=[
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
     ],
     packages=[
-        'done',
+        'donewithanswer',
     ],
     install_requires=load_requirements('requirements/base.in'),
     entry_points={
         'xblock.v1': [
-            'done = done:DoneXBlock',
+            'donewithanswer = donewithanswer:DoneWithAnswerXBlock',
         ]
     },
-    package_data=package_data("done", "static"),
+    package_data=package_data("donewithanswer", "static"),
 )

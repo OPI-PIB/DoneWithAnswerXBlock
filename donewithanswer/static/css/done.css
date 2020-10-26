@@ -1,5 +1,12 @@
 /* CSS for DoneXBlock */
 
+/* .done-xblock {
+    border: 1px solid #cf1930;
+    width: 100%;
+    padding: 2rem;
+    margin: 2 rem;
+} */
+
 .done_aria_hidden {
     position:absolute;
     color:rgba(0,0,0,0);
@@ -15,8 +22,8 @@
 }
 
 .done_onoffswitch {
-    position: relative; width: 180px;
-    width: 180px;
+    position: relative; width: 100%;
+    width: 100%;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
 
@@ -26,7 +33,8 @@
 
 .done_onoffswitch-label {
     display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 10px;
+    border: 1px solid #cf1930;
+    white-space: normal !important;
 }
 
 .done_onoffswitch-inner {
@@ -46,14 +54,15 @@
 
 .done_onoffswitch-inner:after {
     content: "Mark as complete";
-    padding-left: 40px;
-    background-color: rgb(0, 158, 231); color: #FFFFFF;
+    background-color: #FFFFFF; 
+    color: #cf1930;
+    text-align: center;
 }
 .done_onoffswitch-inner:before {
     content: "Unmark";
-    padding-right: 100px;
-    background-color: #EEEEEE; color: #999999;
-    text-align: right;
+    background-color: #cf1930; 
+    color: #FFFFFF;
+    text-align: center;
 }
 
 .done_animated .done_onoffswitch-switch {
@@ -64,12 +73,12 @@
 .done_onoffswitch-switch {
     height: 18px;
     display: block; width: 18px; margin: 6px 6px 6px 6px;
-    padding: -20px -20px -20px -20px;
+    /* padding: -20px -20px -20px -20px; */
     background-position: center;
-    border: 2px solid #999999; border-radius: 20px;
+    border: 1px solid #cf1930;
     position: absolute; top: 0; bottom: 0; right: 146px;
     content: "X";
-    text-color:black;
+    color:black;
 }
 
 .done_onoffswitch-checkbox:checked + .done_onoffswitch-label .done_onoffswitch-inner {
@@ -78,44 +87,4 @@
 
 .done_onoffswitch-checkbox:checked + .done_onoffswitch-label .done_onoffswitch-switch {
     right: 0px; 
-}
-
-.done-checked {
-    background-color: #018801;
-}
-
-.done-unchecked {
-    background-color: #FFFFFF;
-}
-
-.done_grow {
-    flex-grow: 1;
-}
-
-.done_nogrow {
-    flex-grow: 0;
-}
-
-/* Right to left (rtl) language css */
-
-body.rtl .done_onoffswitch-checkbox:checked + .done_onoffswitch-label .done_onoffswitch-inner {
-    margin-right: 0;
-}
-body.rtl .done_onoffswitch-checkbox:checked + .done_onoffswitch-label .done_onoffswitch-switch {
-    right: 0px;
-}
-
-body.rtl .done_onoffswitch-inner {
-    margin-right: -100%;
-}
-
-body.rtl .done_onoffswitch-inner:before {
-    padding-right: 10px;
-    text-align: right;
-}
-
-body.rtl .done_onoffswitch-inner:after {
-    padding-left: 22px;
-    float: left;
-    text-align: left;
 }

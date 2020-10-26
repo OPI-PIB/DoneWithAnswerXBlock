@@ -18,10 +18,16 @@ def resource_string(path):
     return data.decode("utf8")
 
 
-class DoneXBlock(XBlock):
+class DoneWithAnswerXBlock(XBlock):
     """
     Show a toggle which lets students mark things as done.
     """
+    
+    description = String(
+        scope=Scope.content,
+        help="Problem description.",
+        default="Problem description"
+    )
 
     done = Boolean(
         scope=Scope.user_state,
@@ -29,12 +35,11 @@ class DoneXBlock(XBlock):
         default=False
     )
 
-    align = String(
-        scope=Scope.settings,
-        help="Align left/right/center",
-        default="left"
+    feedback = String(
+        scope=Scope.content,
+        help="Feedback for student.",
+        default="Feedback"
     )
-
     has_score = True
 
     # pylint: disable=unused-argument
@@ -66,38 +71,49 @@ class DoneXBlock(XBlock):
         """
         html_resource = resource_string("static/html/done.html")
         html = html_resource.format(done=self.done,
+                                    feedback=self.feedback,
+                                    description=self.description,
                                     id=uuid.uuid1(0))
-        (unchecked_png, checked_png) = (
-            self.runtime.local_resource_url(self, x) for x in
-            ('public/check-empty.png', 'public/check-full.png')
-        )
 
         frag = Fragment(html)
         frag.add_css(resource_string("static/css/done.css"))
         frag.add_javascript(resource_string("static/js/src/done.js"))
-        frag.initialize_js("DoneXBlock", {'state': self.done,
-                                          'unchecked': unchecked_png,
-                                          'checked': checked_png,
-                                          'align': self.align.lower()})
+        frag.initialize_js("DoneWithAnswerXBlock", {'state': self.done})
         return frag
 
     def studio_view(self, _context=None):  # pylint: disable=unused-argument
         '''
         Minimal view with no configuration options giving some help text.
         '''
-        html = resource_string("static/html/studioview.html")
+        html_resource = resource_string("static/html/studioview.html")
+        html = html_resource.format(done=self.done,
+                                    feedback=self.feedback,
+                                    description=self.description,
+                                    id=uuid.uuid1(0))
         frag = Fragment(html)
+        frag.add_javascript(resource_string("static/js/src/studioview.js"))
+        frag.initialize_js("DoneWithAnswerXBlockEdit")
         return frag
+    
+    def studio_submit(self, data, suffix=''):
+        """
+        Called when submitting the form in Studio.
+        """
+        self.description = data.get('description')
+        self.feedback = data.get('feedback')
+        
+        return {'result': 'success'}
 
     @staticmethod
     def workbench_scenarios():
         """A canned scenario for display in the workbench."""
         return [
-            ("DoneXBlock",
+            ("DoneWithAnswerXBlock",
              """<vertical_demo>
-                  <done align="left"> </done>
-                  <done align="right"> </done>
-                  <done align="center"> </done>
+                  <done description="Click Mark as complete" feedback="Good job!"> </done>
+                  <done description="Think about Poland" feedback="Well done!"> </done>
+                  <done description="Pres Alt+F4" feedback="Great!"> </done>
+                  <done> </done>
                 </vertical_demo>
              """),
         ]
@@ -109,7 +125,7 @@ class DoneXBlock(XBlock):
     # It should be included as a mixin.
 
     display_name = String(
-        default="Completion", scope=Scope.settings,
+        default="Completion 2", scope=Scope.settings,
         help="Display name"
     )
 
