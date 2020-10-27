@@ -95,6 +95,7 @@ class DoneWithAnswerXBlock(XBlock):
         frag.initialize_js("DoneWithAnswerXBlockEdit")
         return frag
     
+    @XBlock.json_handler
     def studio_submit(self, data, suffix=''):
         """
         Called when submitting the form in Studio.
