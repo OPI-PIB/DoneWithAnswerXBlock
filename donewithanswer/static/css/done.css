@@ -53,13 +53,13 @@
 }
 
 .done_onoffswitch-inner:after {
-    content: "Mark as complete";
+    content: "Wykonano";
     background-color: #FFFFFF; 
     color: #cf1930;
     text-align: center;
 }
 .done_onoffswitch-inner:before {
-    content: "Unmark";
+    content: "Wykonano";
     background-color: #cf1930; 
     color: #FFFFFF;
     text-align: center;
