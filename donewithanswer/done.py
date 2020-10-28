@@ -11,6 +11,7 @@ from xblock.core import XBlock
 from xblock.fields import Boolean, DateTime, Float, Scope, String
 from web_fragments.fragment import Fragment
 
+_ = self.runtime.service(self, "i18n").ugettext
 
 def resource_string(path):
     """Handy helper for getting resources from our kit."""
@@ -25,20 +26,20 @@ class DoneWithAnswerXBlock(XBlock):
     
     description = String(
         scope=Scope.content,
-        help="Problem description.",
-        default="Problem description"
+        help=_("Problem description."),
+        default=_("Default problem description")
     )
 
     done = Boolean(
         scope=Scope.user_state,
-        help="Is the student done?",
+        help=_("Is the student done?"),
         default=False
     )
 
     feedback = String(
         scope=Scope.content,
-        help="Feedback for student.",
-        default="Feedback"
+        help=_("Feedback for student."),
+        default=_("Default feedback")
     )
     has_score = True
 
@@ -126,8 +127,8 @@ class DoneWithAnswerXBlock(XBlock):
     # It should be included as a mixin.
 
     display_name = String(
-        default="Pytanie do autorefleksji", scope=Scope.settings,
-        help="Display name"
+        default=_("Self-reflection question with feedback answer"), scope=Scope.settings,
+        help=_("Display name")
     )
 
     start = DateTime(
