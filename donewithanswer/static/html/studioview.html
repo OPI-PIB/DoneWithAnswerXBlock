@@ -3,26 +3,26 @@
   <ul class="list-input settings-list">
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
-        <label class="label setting-label" for="description">{{Task}}</label>
+        <label class="label setting-label" for="description">{% trans 'Task' %}</label>
         <input class="input setting-input" name="description" id="description" value="{description}" type="text" />
       </div>
-      <span class="tip setting-help">{{Task description}}</span>
+      <span class="tip setting-help">{% trans 'Task description' %}</span>
     </li>
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
-        <label class="label setting-label" for="feedback">{{Feedback}}</label>
+        <label class="label setting-label" for="feedback">{% trans 'Feedback' %}</label>
         <input class="input setting-input" name="feedback" id="feedback" value="{feedback}" type="text" />
       </div>
-      <span class="tip setting-help">{{Feedback for students}}</span>
+      <span class="tip setting-help">{% trans 'Feedback for students' %}</span>
     </li>
   </ul>
   <div class="xblock-actions">
     <ul>
       <li class="action-item">
-        <a href="#" class="button action-primary save-button">{{Save}}</a>
+        <a href="#" class="button action-primary save-button">{% trans 'Save' %}</a>
       </li>
       <li class="action-item">
-        <a href="#" class="button cancel-button">{{Cancel}}</a>
+        <a href="#" class="button cancel-button">{% trans 'Cancel' %}</a>
       </li>
     </ul>
   </div>

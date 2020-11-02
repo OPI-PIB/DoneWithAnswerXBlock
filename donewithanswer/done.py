@@ -6,19 +6,20 @@ import uuid
 
 import six
 
+from django.utils import translation
 import pkg_resources
 from xblock.core import XBlock
 from xblock.fields import Boolean, DateTime, Float, Scope, String
 from web_fragments.fragment import Fragment
 
-_ = self.runtime.service(self, "i18n").ugettext
+_ = lambda text: text
 
 def resource_string(path):
     """Handy helper for getting resources from our kit."""
     data = pkg_resources.resource_string(__name__, path)
     return data.decode("utf8")
 
-
+@XBlock.needs('i18n')
 class DoneWithAnswerXBlock(XBlock):
     """
     Show a toggle which lets students mark things as done.
@@ -42,6 +43,21 @@ class DoneWithAnswerXBlock(XBlock):
         default=_("Default feedback")
     )
     has_score = True
+
+    display_name = String(
+        default=_("Self-reflection question with feedback answer"), scope=Scope.settings,
+        help=_("Display name")
+    )
+
+    def init_emulation(self):
+        """
+        Emulation of init function, for translation purpose.
+        """
+        if not self.skip_flag:
+            i18n_ = self.runtime.service(self, "i18n").ugettext
+            self.fields['display_name']._default = i18n_(
+                self.fields['display_name']._default)
+            self.skip_flag = True
 
     # pylint: disable=unused-argument
     @XBlock.json_handler
@@ -126,10 +142,7 @@ class DoneWithAnswerXBlock(XBlock):
     # It's needed to keep the LMS+Studio happy.
     # It should be included as a mixin.
 
-    display_name = String(
-        default=_("Self-reflection question with feedback answer"), scope=Scope.settings,
-        help=_("Display name")
-    )
+
 
     start = DateTime(
         default=None, scope=Scope.settings,
