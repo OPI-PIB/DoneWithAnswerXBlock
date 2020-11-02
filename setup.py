@@ -57,5 +57,5 @@ setup(
             'donewithanswer = donewithanswer:DoneWithAnswerXBlock',
         ]
     },
-    package_data=package_data("donewithanswer", "static"),
+    package_data=package_data("donewithanswer", ["static", "public", "translations"]),
 )

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-02 10:28+0000\n"
+"POT-Creation-Date: 2020-11-02 15:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,54 +17,54 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: donewithanswer/done.py:30
+#: done.py:34
 msgid "Problem description."
 msgstr ""
 
-#: donewithanswer/done.py:31
+#: done.py:35
 msgid "Default problem description"
 msgstr ""
 
-#: donewithanswer/done.py:36
+#: done.py:40
 msgid "Is the student done?"
 msgstr ""
 
-#: donewithanswer/done.py:42
+#: done.py:46
 msgid "Feedback for student."
 msgstr ""
 
-#: donewithanswer/done.py:43
+#: done.py:47
 msgid "Default feedback"
 msgstr ""
 
-#: donewithanswer/done.py:48
+#: done.py:52
 msgid "Self-reflection question with feedback answer"
 msgstr ""
 
-#: donewithanswer/done.py:49
+#: done.py:53
 msgid "Display name"
 msgstr ""
 
-#: donewithanswer/static/html/studioview.html:6
+#: static/html/studioview.html:6
 msgid "Task"
 msgstr ""
 
-#: donewithanswer/static/html/studioview.html:9
+#: static/html/studioview.html:9
 msgid "Task description"
 msgstr ""
 
-#: donewithanswer/static/html/studioview.html:13
+#: static/html/studioview.html:13
 msgid "Feedback"
 msgstr ""
 
-#: donewithanswer/static/html/studioview.html:16
+#: static/html/studioview.html:16
 msgid "Feedback for students"
 msgstr ""
 
-#: donewithanswer/static/html/studioview.html:22
+#: static/html/studioview.html:22
 msgid "Save"
 msgstr ""
 
-#: donewithanswer/static/html/studioview.html:25
+#: static/html/studioview.html:25
 msgid "Cancel"
 msgstr ""
