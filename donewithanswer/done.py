@@ -46,6 +46,13 @@ class DoneWithAnswerXBlock(XBlock):
         help=_("Feedback for student."),
         default=_("Default feedback")
     )
+
+    button_name = String(
+        scope=Scope.content,
+        help=_("Button name."),
+        default=_("Done")
+    )
+
     has_score = True
     skip_flag = False
 
@@ -94,12 +101,13 @@ class DoneWithAnswerXBlock(XBlock):
         html = html_resource.format(done=self.done,
                                     feedback=self.feedback,
                                     description=self.description,
+                                    button_name=self.button_name,
                                     id=uuid.uuid1(0))
 
         frag = Fragment(html)
         frag.add_css(resource_string("static/css/done.css"))
         frag.add_javascript(resource_string("static/js/src/done.js"))
-        frag.initialize_js("DoneWithAnswerXBlock", {'state': self.done})
+        frag.initialize_js("DoneWithAnswerXBlock", {'state': self.done, 'button_name': self.button_name})
         return frag
 
     def studio_view(self, _context=None):  # pylint: disable=unused-argument
@@ -112,6 +120,7 @@ class DoneWithAnswerXBlock(XBlock):
             'done': self.done,
             'feedback': self.feedback,
             'description': self.description,
+            'button_name': self.button_name,
             'id': uuid.uuid1(0)
         }
 
@@ -134,6 +143,7 @@ class DoneWithAnswerXBlock(XBlock):
         """
         self.description = data.get('description')
         self.feedback = data.get('feedback')
+        self.button_name = data.get('button_name')
 
         return {'result': 'success'}
 
@@ -143,9 +153,9 @@ class DoneWithAnswerXBlock(XBlock):
         return [
             ("DoneWithAnswerXBlock",
              """<vertical_demo>
-                  <done description="Click Mark as complete" feedback="Good job!"> </done>
-                  <done description="Think about Poland" feedback="Well done!"> </done>
-                  <done description="Pres Alt+F4" feedback="Great!"> </done>
+                  <done description="Click Mark as complete" button_name="Mark as coplete" feedback="Good job!"> </done>
+                  <done description="Think about Poland" button_name="Poland!" feedback="Well done!"> </done>
+                  <done description="Pres Alt+F4" button_name="Alt+F4" feedback="Great!"> </done>
                   <done> </done>
                 </vertical_demo>
              """),
