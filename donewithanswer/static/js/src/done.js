@@ -8,7 +8,6 @@ if (typeof Logger === 'undefined') {
 
 function update_knob(element, data) {
   if($('.done_onoffswitch-checkbox', element).prop("checked")) {
-    $(".done_onoffswitch-switch").css("border","");
     $(".done_feedback", element).css("display", "");
   } else {
     $(".done_feedback", element).css("display", "none");
@@ -28,16 +27,15 @@ function DoneWithAnswerXBlock(runtime, element, data) {
     var handlerUrl = runtime.handlerUrl(element, 'toggle_button');
 
     $(function ($) {
-	$('.done_onoffswitch', element).addClass("done_animated");
-	$('.done_onoffswitch-checkbox', element).change(function(){
-	    var checked = $('.done_onoffswitch-checkbox', element).prop("checked");
-	    $.ajax({
-		type: "POST",
-		url: handlerUrl,
-		data: JSON.stringify({'done':checked})
-	    });
-	    Logger.log("edx.done.toggled", {'done': checked});
-	    update_knob(element, data);
-	});
+        $('.done_onoffswitch-checkbox', element).change(function(){
+            var checked = $('.done_onoffswitch-checkbox', element).prop("checked");
+            $.ajax({
+                type: "POST",
+                url: handlerUrl,
+                data: JSON.stringify({'done':checked})
+            });
+            Logger.log("edx.done.toggled", {'done': checked});
+            update_knob(element, data);
+        });
     });
 }
