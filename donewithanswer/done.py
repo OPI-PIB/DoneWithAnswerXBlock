@@ -153,10 +153,11 @@ class DoneWithAnswerXBlock(XBlock):
         return [
             ("DoneWithAnswerXBlock",
              """<vertical_demo>
-                  <done description="Click Mark as complete" button_name="Mark as coplete" feedback="Good job!"> </done>
-                  <done description="Think about Poland" button_name="Poland!" feedback="Well done!"> </done>
-                  <done description="Pres Alt+F4" button_name="Alt+F4" feedback="Great!"> </done>
-                  <done> </done>
+                  <donewithanswer description="Click Mark as complete" button_name="Mark as complete" feedback="Good job!"> </donewithanswer>
+                  <donewithanswer description="Think about Poland" button_name="Poland!" feedback="Well done!"> </donewithanswer>
+                  <donewithanswer description="Pres Alt+F4" button_name="Alt+F4" feedback="Great!"> </donewithanswer>
+                  <donewithanswer description="" feedback=""></donewithanswer>
+                  <donewithanswer></donewithanswer>
                 </vertical_demo>
              """),
         ]
