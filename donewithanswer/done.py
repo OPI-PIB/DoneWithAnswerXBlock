@@ -11,20 +11,24 @@ import pkg_resources
 from xblock.core import XBlock
 from xblock.fields import Boolean, DateTime, Float, Scope, String
 from web_fragments.fragment import Fragment
+from xblockutils.resources import ResourceLoader
 
 _ = lambda text: text
+loader = ResourceLoader(__name__)
+
 
 def resource_string(path):
     """Handy helper for getting resources from our kit."""
     data = pkg_resources.resource_string(__name__, path)
     return data.decode("utf8")
 
+
 @XBlock.needs('i18n')
 class DoneWithAnswerXBlock(XBlock):
     """
     Show a toggle which lets students mark things as done.
     """
-    
+
     description = String(
         scope=Scope.content,
         help=_("Problem description."),
@@ -42,7 +46,15 @@ class DoneWithAnswerXBlock(XBlock):
         help=_("Feedback for student."),
         default=_("Default feedback")
     )
+
+    button_name = String(
+        scope=Scope.content,
+        help=_("Button name."),
+        default=_("Done")
+    )
+
     has_score = True
+    skip_flag = False
 
     display_name = String(
         default=_("Self-reflection question with feedback answer"), scope=Scope.settings,
@@ -55,8 +67,7 @@ class DoneWithAnswerXBlock(XBlock):
         """
         if not self.skip_flag:
             i18n_ = self.runtime.service(self, "i18n").ugettext
-            self.fields['display_name']._default = i18n_(
-                self.fields['display_name']._default)
+            self.fields['display_name']._default = i18n_(self.fields['display_name']._default)
             self.skip_flag = True
 
     # pylint: disable=unused-argument
@@ -90,28 +101,41 @@ class DoneWithAnswerXBlock(XBlock):
         html = html_resource.format(done=self.done,
                                     feedback=self.feedback,
                                     description=self.description,
+                                    button_name=self.button_name,
                                     id=uuid.uuid1(0))
 
         frag = Fragment(html)
         frag.add_css(resource_string("static/css/done.css"))
         frag.add_javascript(resource_string("static/js/src/done.js"))
-        frag.initialize_js("DoneWithAnswerXBlock", {'state': self.done})
+        frag.initialize_js("DoneWithAnswerXBlock", {'state': self.done, 'button_name': self.button_name})
         return frag
 
     def studio_view(self, _context=None):  # pylint: disable=unused-argument
         '''
         Minimal view with no configuration options giving some help text.
         '''
-        html_resource = resource_string("static/html/studioview.html")
-        html = html_resource.format(done=self.done,
-                                    feedback=self.feedback,
-                                    description=self.description,
-                                    id=uuid.uuid1(0))
-        frag = Fragment(html)
+        self.init_emulation()
+
+        ctx = {
+            'done': self.done,
+            'feedback': self.feedback,
+            'description': self.description,
+            'button_name': self.button_name,
+            'id': uuid.uuid1(0)
+        }
+
+        frag = Fragment()
+
+        frag.add_content(loader.render_django_template(
+            "static/html/studioview.html",
+            context=ctx,
+            i18n_service=self.runtime.service(self, "i18n"),
+        ))
+
         frag.add_javascript(resource_string("static/js/src/studioview.js"))
         frag.initialize_js("DoneWithAnswerXBlockEdit")
         return frag
-    
+
     @XBlock.json_handler
     def studio_submit(self, data, suffix=''):
         """
@@ -119,7 +143,8 @@ class DoneWithAnswerXBlock(XBlock):
         """
         self.description = data.get('description')
         self.feedback = data.get('feedback')
-        
+        self.button_name = data.get('button_name')
+
         return {'result': 'success'}
 
     @staticmethod
@@ -128,10 +153,11 @@ class DoneWithAnswerXBlock(XBlock):
         return [
             ("DoneWithAnswerXBlock",
              """<vertical_demo>
-                  <done description="Click Mark as complete" feedback="Good job!"> </done>
-                  <done description="Think about Poland" feedback="Well done!"> </done>
-                  <done description="Pres Alt+F4" feedback="Great!"> </done>
-                  <done> </done>
+                  <donewithanswer description="Click Mark as complete" button_name="Mark as complete" feedback="Good job!"> </donewithanswer>
+                  <donewithanswer description="Think about Poland" button_name="Poland!" feedback="Well done!"> </donewithanswer>
+                  <donewithanswer description="Pres Alt+F4" button_name="Alt+F4" feedback="Great!"> </donewithanswer>
+                  <donewithanswer description="" feedback=""></donewithanswer>
+                  <donewithanswer></donewithanswer>
                 </vertical_demo>
              """),
         ]
@@ -141,8 +167,6 @@ class DoneWithAnswerXBlock(XBlock):
     #        xblock/lms_mixin.py
     # It's needed to keep the LMS+Studio happy.
     # It should be included as a mixin.
-
-
 
     start = DateTime(
         default=None, scope=Scope.settings,

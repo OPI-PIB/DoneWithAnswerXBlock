@@ -7,12 +7,14 @@ import os
 from setuptools import setup
 
 
-def package_data(pkg, root):
+def package_data(pkg, roots):
     """Generic function to find package_data for `pkg` under `root`."""
     data = []
-    for dirname, _, files in os.walk(os.path.join(pkg, root)):
-        for fname in files:
-            data.append(os.path.relpath(os.path.join(dirname, fname), pkg))
+    
+    for root in roots:
+        for dirname, _, files in os.walk(os.path.join(pkg, root)):
+            for fname in files:
+                data.append(os.path.relpath(os.path.join(dirname, fname), pkg))
 
     return {pkg: data}
 
@@ -57,5 +59,5 @@ setup(
             'donewithanswer = donewithanswer:DoneWithAnswerXBlock',
         ]
     },
-    package_data=package_data("donewithanswer", "static"),
+    package_data=package_data("donewithanswer", ["static", "public", "translations"]),
 )

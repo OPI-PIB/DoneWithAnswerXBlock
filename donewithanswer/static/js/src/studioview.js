@@ -3,8 +3,9 @@ function DoneWithAnswerXBlockEdit(runtime, element) {
     $(element).find('.save-button').bind('click', function() {
         var handlerUrl = runtime.handlerUrl(element, 'studio_submit');
         var data = {
-            description: $(element).find('input[name=description]').val(),
-            feedback: $(element).find('input[name=feedback]').val()
+            description: $(element).find('textarea[name=description]').val(),
+            feedback: $(element).find('textarea[name=feedback]').val(),
+            button_name: $(element).find('input[name=button_name]').val()
         };
         runtime.notify('save', {state: 'start'});
         $.post(handlerUrl, JSON.stringify(data)).done(function(response) {
