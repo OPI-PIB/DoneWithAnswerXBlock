@@ -38,10 +38,18 @@ msgid "Default feedback"
 msgstr ""
 
 #: done.py:52
-msgid "Self-reflection question with feedback answer"
+msgid "Button name."
 msgstr ""
 
 #: done.py:53
+msgid "Done"
+msgstr ""
+
+#: done.py:60
+msgid "Self-reflection question with feedback answer"
+msgstr ""
+
+#: done.py:61
 msgid "Display name"
 msgstr ""
 
@@ -49,22 +57,27 @@ msgstr ""
 msgid "Task"
 msgstr ""
 
-#: static/html/studioview.html:9
+#: static/html/studioview.html:10
 msgid "Task description"
 msgstr ""
 
-#: static/html/studioview.html:13
+#: static/html/studioview.html:14
 msgid "Feedback"
 msgstr ""
 
-#: static/html/studioview.html:16
+#: static/html/studioview.html:18
 msgid "Feedback for students"
 msgstr ""
 
 #: static/html/studioview.html:22
+#: static/html/studioview.html:25
+msgid "Button name"
+msgstr ""
+
+#: static/html/studioview.html:31
 msgid "Save"
 msgstr ""
 
-#: static/html/studioview.html:25
+#: static/html/studioview.html:34
 msgid "Cancel"
 msgstr ""

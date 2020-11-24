@@ -17,54 +17,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: #: donewithanswer/done.py:30
+#: done.py:34
 msgid "Problem description."
 msgstr "Polecenie"
 
-#: donewithanswer/done.py:31
+#: done.py:35
 msgid "Default problem description"
 msgstr "Domyślne polecenie"
 
-#: donewithanswer/done.py:36
+#: done.py:40
 msgid "Is the student done?"
 msgstr "Czy wykonano zadanie?"
 
-#: donewithanswer/done.py:42
+#: done.py:46
 msgid "Feedback for student."
-msgstr "Odpowiedź zwrotna"
+msgstr "Informacja zwrotna dla studenta"
 
-#: donewithanswer/done.py:43
+#: done.py:47
 msgid "Default feedback"
-msgstr "Standardowa odpowiedź zwrotna"
+msgstr "Domyślna informacja zwrotna"
 
-#: donewithanswer/done.py:48
+#: done.py:52
+msgid "Button name."
+msgstr "Nazwa przycisku"
+
+#: done.py:53
+msgid "Done"
+msgstr "Wykonano"
+
+#: done.py:60
 msgid "Self-reflection question with feedback answer"
 msgstr "Pytanie do autorefleksji z odpowiedzią zwrotną"
 
-#: donewithanswer/done.py:49
+#: done.py:61
 msgid "Display name"
 msgstr "Nazwa"
 
-#: donewithanswer/static/html/studioview.html:6
+#: static/html/studioview.html:6
 msgid "Task"
 msgstr "Zadanie"
 
-#: donewithanswer/static/html/studioview.html:9
+#: static/html/studioview.html:10
 msgid "Task description"
 msgstr "Opis zadania"
 
-#: donewithanswer/static/html/studioview.html:13
+#: static/html/studioview.html:14
 msgid "Feedback"
-msgstr "Odpowiedź zwrotna"
+msgstr "Informacja zwrotna"
 
-#: donewithanswer/static/html/studioview.html:16
+#: static/html/studioview.html:18
 msgid "Feedback for students"
-msgstr "Odpowiedź zwrotna"
+msgstr "Informacja zwrotna dla studenta"
 
-#: donewithanswer/static/html/studioview.html:22
+#: static/html/studioview.html:22
+#: static/html/studioview.html:25
+msgid "Button name"
+msgstr "Nazwa przycisku"
+
+#: static/html/studioview.html:31
 msgid "Save"
 msgstr "Zapisz"
 
-#: donewithanswer/static/html/studioview.html:25
+#: static/html/studioview.html:34
 msgid "Cancel"
 msgstr "Anuluj"
