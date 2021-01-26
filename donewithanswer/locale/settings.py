@@ -43,11 +43,11 @@ LANGUAGES = [
 ]
 
 STATICI18N_DOMAIN = 'text'
+
 STATICI18N_PACKAGES = (
     'donewithanswer',
 )
-STATICI18N_ROOT = 'inline_dropdown/static/js'
 
-STATICI18N_NAMESPACE = 'inline_dropdowni18n'
+STATICI18N_NAMESPACE = 'downwithansweri18n'
 
 STATICI18N_OUTPUT_DIR = 'static/js/translations'

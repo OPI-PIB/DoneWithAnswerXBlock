@@ -1,16 +1,13 @@
 """Setup for done XBlock."""
 
-from __future__ import absolute_import
-
 import os
-
 from setuptools import setup
 
 
 def package_data(pkg, roots):
     """Generic function to find package_data for `pkg` under `root`."""
     data = []
-    
+
     for root in roots:
         for dirname, _, files in os.walk(os.path.join(pkg, root)):
             for fname in files:
@@ -44,8 +41,8 @@ def is_requirement(line):
 
 setup(
     name='done-with-answer-xblock',
-    version='2.0.3',
-    description='done with answer XBlock',   # TODO: write a better description.
+    version='0.1.0',
+    description='Done XBlock extended for q&a firlds and new look.',
     classifiers=[
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
@@ -59,5 +56,8 @@ setup(
             'donewithanswer = donewithanswer:DoneWithAnswerXBlock',
         ]
     },
-    package_data=package_data("donewithanswer", ["static", "public", "translations"]),
+    package_data=package_data(
+        "donewithanswer",
+        ["static", "public", "translations"]
+    ),
 )
