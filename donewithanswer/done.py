@@ -1,17 +1,12 @@
 """ Show a toggle which lets students mark things as done."""
 
-from __future__ import absolute_import
-
 import uuid
-
-import six
-
-from django.utils import translation
 import pkg_resources
+
 from xblock.core import XBlock
 from xblock.fields import Boolean, DateTime, Float, Scope, String
-from web_fragments.fragment import Fragment
 from xblockutils.resources import ResourceLoader
+from web_fragments.fragment import Fragment
 
 _ = lambda text: text
 loader = ResourceLoader(__name__)
@@ -57,7 +52,8 @@ class DoneWithAnswerXBlock(XBlock):
     skip_flag = False
 
     display_name = String(
-        default=_("Self-reflection question with feedback answer"), scope=Scope.settings,
+        default=_("Self-reflection question with feedback answer"),
+        scope=Scope.settings,
         help=_("Display name")
     )
 
@@ -67,7 +63,9 @@ class DoneWithAnswerXBlock(XBlock):
         """
         if not self.skip_flag:
             i18n_ = self.runtime.service(self, "i18n").ugettext
-            self.fields['display_name']._default = i18n_(self.fields['display_name']._default)
+            self.fields['display_name']._default = i18n_(
+                self.fields['display_name']._default
+            )
             self.skip_flag = True
 
     # pylint: disable=unused-argument
@@ -82,13 +80,18 @@ class DoneWithAnswerXBlock(XBlock):
             self.done = data['done']
             if data['done']:
                 grade = 1
+                self.complete = True
             else:
                 grade = 0
             grade_event = {'value': grade, 'max_value': 1}
             self.runtime.publish(self, 'grade', grade_event)
             # This should move to self.runtime.publish, once that pipeline
             # is finished for XBlocks.
-            self.runtime.publish(self, "edx.done.toggled", {'done': self.done})
+            self.runtime.publish(
+                self,
+                "edx.done.toggled",
+                {'done': self.done}
+            )
 
         return {'state': self.done}
 
@@ -107,7 +110,13 @@ class DoneWithAnswerXBlock(XBlock):
         frag = Fragment(html)
         frag.add_css(resource_string("static/css/done.css"))
         frag.add_javascript(resource_string("static/js/src/done.js"))
-        frag.initialize_js("DoneWithAnswerXBlock", {'state': self.done, 'button_name': self.button_name})
+        frag.initialize_js(
+            "DoneWithAnswerXBlock",
+            {
+                'state': self.done,
+                'button_name': self.button_name
+            }
+        )
         return frag
 
     def studio_view(self, _context=None):  # pylint: disable=unused-argument
@@ -153,41 +162,29 @@ class DoneWithAnswerXBlock(XBlock):
         return [
             ("DoneWithAnswerXBlock",
              """<vertical_demo>
-                  <donewithanswer description="Click Mark as complete" button_name="Mark as complete" feedback="Good job!"> </donewithanswer>
-                  <donewithanswer description="Think about Poland" button_name="Poland!" feedback="Well done!"> </donewithanswer>
-                  <donewithanswer description="Pres Alt+F4" button_name="Alt+F4" feedback="Great!"> </donewithanswer>
-                  <donewithanswer description="" feedback=""></donewithanswer>
-                  <donewithanswer></donewithanswer>
+                    <donewithanswer
+                        description="Click Mark as complete"
+                        button_name="Mark as complete"
+                        feedback="Good job!">
+                    </donewithanswer>
+                    <donewithanswer
+                        description="Think about Poland"
+                        button_name="Poland!"
+                        feedback="Well done!">
+                    </donewithanswer>
+                    <donewithanswer
+                        description="Pres Alt+F4"
+                        button_name="Alt+F4"
+                        feedback="Great!">
+                    </donewithanswer>
+                    <donewithanswer
+                        description=""
+                        feedback="">
+                    </donewithanswer>
+                    <donewithanswer></donewithanswer>
                 </vertical_demo>
              """),
         ]
-
-    # Everything below is stolen from
-    # https://github.com/edx/edx-ora2/blob/master/apps/openassessment/
-    #        xblock/lms_mixin.py
-    # It's needed to keep the LMS+Studio happy.
-    # It should be included as a mixin.
-
-    start = DateTime(
-        default=None, scope=Scope.settings,
-        help="ISO-8601 formatted string representing the start date "
-             "of this assignment. We ignore this."
-    )
-
-    due = DateTime(
-        default=None, scope=Scope.settings,
-        help="ISO-8601 formatted string representing the due date "
-             "of this assignment. We ignore this."
-    )
-
-    weight = Float(
-        display_name="Problem Weight",
-        help=("Defines the number of points each problem is worth. "
-              "If the value is not set, the problem is worth the sum of the "
-              "option point values."),
-        values={"min": 0, "step": .1},
-        scope=Scope.settings
-    )
 
     def has_dynamic_children(self):
         """Do we dynamically determine our children? No, we don't have any.
