@@ -30,7 +30,7 @@
 
 .done_onoffswitch-checkbox:checked + span {
     color: white;
-    background-color: #cf1930;
+    background-color: #E41D37;
 }
 
 .done_onoffswitch-label {
@@ -42,12 +42,9 @@
     display: block;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    /* width: 50%; */
     background-color: white;
-    color: #cf1930;
-    border: 1px solid #cf1930;
-    font-weight: bold;
-    /* height: 2rem; */
+    color: #E41D37;
+    border: 1px solid #E41D37;
     text-align: center;
 }
 
